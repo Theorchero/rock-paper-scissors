@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors (Console Game)</title>
+  </head>
+  <body>
+    <script>
+      console.log("Hello World!");
+
+      let computerSelection = getComputerChoice();
+      console.log(computerSelection);
+      function getComputerChoice() {
+        let randomNumber = Math.floor(Math.random() * 3);
+        if (randomNumber == 0) {
+          //   let randomNumber = "rock";
+          return "rock";
+        }
+        if (randomNumber == 1) {
+          //   let computerSelection = "paper";
+          return "paper";
+        }
+        if (randomNumber == 2) {
+          //   let computerSelection = "scissors";
+          return "scissors";
+        }
+      }
+      console.log(computerSelection);
+      function playRound(playerSelection, computerSelection) {
+        // your code here!
+        if (computerSelection == "rock") {
+          console.log("Computer chose " + computerSelection + "! It is a tie!");
+        } else if (computerSelection == "paper") {
+          console.log(`Computer chose ${computerSelection}! You lose!`);
+        } else if (computerSelection == "scissors") {
+          console.log(`Computer chose ${computerSelection} You win!`);
+        }
+      }
+      console.log(computerSelection);
+      let playerSelection = "rock";
+
+      playRound(playerSelection, computerSelection);
+    </script>
+  </body>
+</html>
