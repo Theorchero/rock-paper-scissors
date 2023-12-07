@@ -3,14 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Rock Paper Scissors (Console Game)</title>
   </head>
   <body>
+    <div>
+      <p id="topText">Click one of the buttons to play!</p>
+    </div>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div>
+      <p id="result"></p>
+    </div>
     <script>
       console.log("Hello World!");
 
+      //Init playerSelection
+      let playerSelection;
+
+      //Setting Rock, Paper, And Scissors buttons
+      let rock = document.getElementById("rock");
+      let paper = document.getElementById("paper");
+      let scissors = document.getElementById("scissors");
+
+      //Setting Result Variable
+      let result = document.getElementById("result");
+
+      //Event listeners
+      rock.addEventListener("click", playerRock);
+      paper.addEventListener("click", playerPaper);
+      scissors.addEventListener("click", playerScissors);
+
+      //Functions attached to listeners
+      function playerRock() {
+        playerSelection = "rock";
+        computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        console.log(`player selection is ${playerSelection}`);
+      }
+
+      function playerPaper() {
+        playerSelection = "paper";
+        computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        console.log(`player selection is ${playerSelection}`);
+      }
+
+      function playerScissors() {
+        playerSelection = "scissors";
+        computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        console.log(`player selection is ${playerSelection}`);
+      }
+      //Randomizing computer choice
       let computerSelection = getComputerChoice();
       console.log(computerSelection);
+      //Fnc to random
       function getComputerChoice() {
         let randomNumber = Math.floor(Math.random() * 3);
         if (randomNumber == 0) {
@@ -26,21 +75,72 @@
           return "scissors";
         }
       }
+      //Debug for computer selection
       console.log(computerSelection);
+      //Play the game
       function playRound(playerSelection, computerSelection) {
         // your code here!
+        //If a tie
+        if (computerSelection == playerSelection) {
+          //tie
+          console.log(
+            `Computer selection was ${computerSelection} and Player selection was ${playerSelection}`
+          );
+          result.innerText = `It's a tie! You chose ${playerSelection} and the computer chose ${computerSelection}`;
+        }
+        // Compare Rock
         if (computerSelection == "rock") {
-          console.log("Computer chose " + computerSelection + "! It is a tie!");
-        } else if (computerSelection == "paper") {
-          console.log(`Computer chose ${computerSelection}! You lose!`);
-        } else if (computerSelection == "scissors") {
-          console.log(`Computer chose ${computerSelection} You win!`);
+          if (playerSelection == "paper") {
+            // Win
+            playerWin();
+          } else if (playerSelection == "scissors") {
+            // Lose
+            playerLose();
+          }
+          // Compare Paper
+          if (computerSelection == "paper") {
+            if (playerSelection == "rock") {
+              // Lose
+              playerLose();
+            } else if (playerSelection == "scissors") {
+              // Win
+              playerWin();
+            }
+          }
+          //Compare Scissors
+          if (computerSelection == "scissors") {
+            if (playerSelection == "rock") {
+              // Lose
+              playerLose();
+            } else if (playerSelection == "paper") {
+              // Win
+              playerWin();
+            }
+          }
         }
       }
+      //Additional debugging for scope
       console.log(computerSelection);
-      let playerSelection = "rock";
+      // let playerSelection = "rock"; //Redacted, use buttons now.
 
-      playRound(playerSelection, computerSelection);
+      //playRound(playerSelection, computerSelection); Redacted, use buttons now
+
+      //Avoid duplicate code, Win and Lose functions!
+
+      function playerWin() {
+        console.log(
+          `Computer selection was ${computerSelection} and Player selection was ${playerSelection}`
+        );
+        result.innerText = `You win! You chose ${playerSelection} and the computer chose ${computerSelection}`;
+        // result.innerHTML //eventually add color features
+      }
+
+      function playerLose() {
+        console.log(
+          `Computer selection was ${computerSelection} and Player selection was ${playerSelection}`
+        );
+        result.innerText = `You Lose! You chose ${playerSelection} and the computer chose ${computerSelection}`;
+      }
     </script>
   </body>
 </html>
